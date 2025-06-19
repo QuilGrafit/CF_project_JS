@@ -1,15 +1,21 @@
 {
-  "name": "astrobot",
-  "version": "1.0.0",
-  "main": "pages/api/bot.js",
+  "name": "astro_bot",
+  "version": "0.1.0",
+  "private": true,
   "scripts": {
-    "dev": "node pages/api/bot.js"
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
   },
   "dependencies": {
-    "next": "^14.0.0",
-    "telegraf": "^4.12.2",
-    "mongodb": "^5.7.0",
-    "i18next": "^23.7.8",
-    "typescript": "^5.2.2"
+    "next": "14.2.4",
+    "react": "18.3.1",
+    "react-dom": "18.3.1",
+    "telegraf": "^4.16.1"
+  },
+  "devDependencies": {
+    "eslint": "8.57.0",
+    "eslint-config-next": "14.2.4"
   }
 }

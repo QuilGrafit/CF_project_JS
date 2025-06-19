@@ -1,21 +1,22 @@
-import { NextApiRequest, NextApiResponse } from 'next';
-import { initBot } from '../../lib/botCore.ts';
+import { Telegraf } from 'telegraf';
 
-export default async function handler(
-  req: NextApiRequest,
-  res: NextApiResponse
-) {
-  const bot = await initBot();
-  
-  // Обработка вебхука
-  await bot.handleUpdate(req.body);
-  
-  res.status(200).json({ status: 'processed' });
-}
+const bot = new Telegraf(process.env.BOT_TOKEN);
 
-// Инициализация вебхука при старте
-export async function setupWebhook() {
-  const bot = await initBot();
-  const webhookUrl = `${process.env.VERCEL_URL}/api/bot`;
-  await bot.telegram.setWebhook(webhookUrl);
+// Обработка стартовой команды
+bot.start((ctx) => ctx.reply('✨ Добро пожаловать в Cosmic Insight!'));
+
+// Вебхук для Vercel
+export default async (req, res) => {
+  try {
+    await bot.handleUpdate(req.body);
+    res.status(200).end();
+  } catch (err) {
+    console.error('Bot error:', err);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+};
+
+// Установка вебхука при старте
+if (process.env.VERCEL_URL) {
+  bot.telegram.setWebhook(`${process.env.VERCEL_URL}/api/bot`);
 }

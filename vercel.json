@@ -12,8 +12,8 @@
     }
   ],
   "env": {
-    "BOT_TOKEN": "@bot_token",
-    "MONGO_URI": "@mongo_uri",
-    "TON_WALLET": "@ton_wallet"
+    "BOT_TOKEN": "BOT_TOKEN",
+    "MONGO_URI": "MONGO_URI",
+    "TON_WALLET": "TON_WALLET"
   }
 }

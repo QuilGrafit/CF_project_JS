@@ -1,0 +1,13 @@
+{
+  "name": "astrobot",
+  "version": "1.0.0",
+  "main": "pages/api/bot.js",
+  "scripts": {
+    "dev": "node pages/api/bot.js"
+  },
+  "dependencies": {
+    "telegraf": "^4.12.2",
+    "mongodb": "^5.7.0",
+    "node-cron": "^3.0.3"
+  }
+}

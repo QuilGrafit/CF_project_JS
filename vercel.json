@@ -1,11 +1,22 @@
 {
-  "name": "astrobot",
-  "version": "1.0.0",
-  "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start"
-  },
+  "routes": [
+    {
+      "src": "/api/bot",
+      "dest": "/pages/api/bot.js",
+      "methods": ["POST"]
+    },
+    {
+      "src": "/api/cron",
+      "dest": "/pages/api/cron.js",
+      "methods": ["GET"]
+    }
+  ],
+  "rewrites": [
+    {
+      "source": "/api/(.*)",
+      "destination": "/pages/api/:1"
+    }
+  ]
   "dependencies": {
     "next": "^14.0.0",
     "telegraf": "^4.12.2",

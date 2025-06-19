@@ -1,36 +1,23 @@
-import { NextApiRequest, NextApiResponse } from 'next';
-import { connectToDatabase } from '../../lib/db.ts';
-import { HoroscopeGenerator } from '../../lib/horoscope.ts';
+import cron from 'node-cron';
 
-export default async function handler(
-  req: NextApiRequest,
-  res: NextApiResponse
-) {
-  // Проверка секретного ключа для защиты
+// Защищенный эндпоинт для ручного запуска рассылки
+export default async (req, res) => {
   if (req.query.secret !== process.env.CRON_SECRET) {
     return res.status(401).json({ error: 'Unauthorized' });
   }
 
-  const db = await connectToDatabase();
-  const users = await db.collection('users').find().toArray();
-  
-  for (const user of users) {
-    try {
-      const horoscope = HoroscopeGenerator.generate(user);
-      // Отправка через Telegram API
-      await fetch(`https://api.telegram.org/bot${process.env.BOT_TOKEN}/sendMessage`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          chat_id: user.id,
-          text: horoscope,
-          parse_mode: 'HTML'
-        })
-      });
-    } catch (error) {
-      console.error(`Error sending to ${user.id}:`, error);
-    }
+  try {
+    // Здесь будет логика рассылки
+    console.log('Cron job executed');
+    res.json({ success: true });
+  } catch (err) {
+    console.error('Cron error:', err);
+    res.status(500).json({ error: 'Cron failed' });
   }
+};
 
-  res.status(200).json({ success: true, sent: users.length });
-}
+// Ежедневная рассылка в 9:00 по UTC
+cron.schedule('0 9 * * *', () => {
+  console.log('Running scheduled horoscope delivery');
+  // Логика рассылки
+});

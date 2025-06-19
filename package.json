@@ -6,8 +6,10 @@
     "dev": "node pages/api/bot.js"
   },
   "dependencies": {
+    "next": "^14.0.0",
     "telegraf": "^4.12.2",
     "mongodb": "^5.7.0",
-    "node-cron": "^3.0.3"
+    "i18next": "^23.7.8",
+    "typescript": "^5.2.2"
   }
 }

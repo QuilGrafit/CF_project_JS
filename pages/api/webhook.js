@@ -1,6 +1,5 @@
-import { VercelRequest, VercelResponse } from '@vercel/node'; // For Vercel specific types if needed, but not strictly required for basic setup
 import { Telegraf } from 'telegraf';
-import { message } from 'telegraf/filters';
+import { message } from 'telegraf/filters.js';
 import { getBotInstance } from '../../lib/bot.js'; // Import the function to get the bot instance
 import { setupHandlers } from '../../lib/handlers.js'; // Import function to set up handlers
 import { setWebhookIfNeeded } from '../../lib/utils.js'; // Utility for webhook management
